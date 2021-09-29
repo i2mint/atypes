@@ -1,98 +1,27 @@
 """
 Types for sound recognition.
 """
-from typing import Callable, Union, Any, List, Tuple
-from numpy import ndarray, int16, int32, float32, float64
+from typing import Callable, Union, Any, List, Tuple, Iterable, Sequence
+from numbers import Number
+# from numpy import ndarray, int16, int32, float32, float64
 
 # Note I'm using Tuple to denote fixed sized sequences and List to denote a sliceable
 #  unbounded sized iterator and
 # tuple as a fixed
 
-
-from typing import TypeVar, Optional, Iterable, Sequence
-
-
-def MyType(
-        name: str,
-        constraint,
-        *more_constraints,
-        doc: Optional[str] = None,
-        aka: Optional[Iterable] = None,
-        covariant=False,
-        contravariant=False,
-        assign_to_globals=False
-):
-    """
-    Make a new type with (optional) doc and (optional) aka, set of var names it often appears as
-
-    Args:
-        name: Name to give the variable
-        constraints: types (see typing.TypeVar)
-        doc: Optional string to put in __doc__ attribute
-        aka: Optional set (or any iterable) to put in _aka attribute,
-            meant to list names the variables of this type often appear as.
-
-    Returns: None
-
-    >>> from typing import Any, List
-    >>> T = MyType('T', int)
-    >>> type(T)
-    <class 'function'>
-    >>> Key = MyType('Key', Any, aka=['key', 'k'])
-    >>> Key._aka
-    {'key', 'k'}
-    >>> Val = MyType('Val', int, float, List[Union[int, float]], doc="A number or list of numbers.")
-    >>> Val.__doc__
-    'A number or list of numbers.'
-    """
-    if len(more_constraints) == 0:
-        new_tp = TypeVar(
-            name, bound=constraint, covariant=covariant, contravariant=contravariant
-        )
-    else:
-        new_tp = TypeVar(
-            name,
-            constraint,
-            *more_constraints,
-            covariant=covariant,
-            contravariant=contravariant
-        )
-    if doc is not None:
-        try:
-            setattr(new_tp, "__doc__", doc)
-        except AttributeError:  # because TypeVar attributes are read only in 3.6, it seems...
-            pass
-    if aka is not None:
-        try:
-            setattr(new_tp, "_aka", set(aka))
-        except AttributeError:  # because TypeVar attributes are read only in 3.6, it seems...
-            pass
-    if assign_to_globals:
-        globals()[
-            name
-        ] = new_tp  # not sure how kosher this is... Should only use at top level of module, for sure!
-    return new_tp
-
+from atypes.util import MyType
 
 # This would have been convenient, but pycharm doesn't see the globals created by NT!
 # from functools import partial
 # NT = partial(new_type, assign_to_globals=True)
 
 
-FixedSizeSeq = MyType("FixedSizeSeq", Tuple, List, ndarray)
+FixedSizeSeq = MyType("FixedSizeSeq", Tuple, List)
 
-VarSizeSeq = MyType("VarSizeSeq", List, ndarray)
+VarSizeSeq = MyType("VarSizeSeq", List)
 
 Key = MyType("Key", Any, doc="Any object used to reference another", aka={"key", "k"})
 
-Number = Union[
-    float,
-    int,
-    int16,
-    int32,
-    float32,
-    float64,
-]
 # Waveform = Iterable[Union[float, int]]
 Sample = MyType(
     "Sample",
