@@ -89,6 +89,58 @@ Segments = MyType(
 )
 
 
+TimeIndex = MyType(
+    'TimeIndex',
+    Number,
+    doc='A number indexing time. Could be in an actual time unit, or could just be '
+    'an enumerator (i.e. "ordinal time")',
+)
+BT = MyType(
+    'BT',
+    TimeIndex,
+    doc='TimeIndex for the lower bound of an interval of time. '
+    'Stands for "Bottom Time". By convention, a BT is inclusive.',
+)
+TT = MyType(
+    'TT',
+    TimeIndex,
+    doc='TimeIndex for the upper bound of an interval of time. '
+    'Stands for "Upper Time". By convention, a TT is exclusive.',
+)
+IntervalTuple = MyType(
+    'IntervalTuple',
+    Tuple[BT, TT],
+    doc='Denotes an interval of time by specifying the (BT, TT) pair',
+)
+IntervalSlice = MyType(
+    'IntervalSlice',
+    slice,  # Note: extra condition: non-None .start and .end, and no .step
+    doc='Denotes an interval of time by specifying the (BT, TT) pair',
+)
+
+# Note: Like a segment in that it hold data from an interval of time, but there's no
+#  constraints on the data items format.
+# Name options: piece, part, section, portion, fragment, wedge, slab, hunk
+
+TimeIndexedItem = MyType(
+    'TimeIndexedItem', Any,
+    doc='Data that is (implicitly or explicitly) time-indexed.'
+)
+Slab = MyType(
+    'Slab',
+    Iterable[TimeIndexedItem],  # extra condition: all items within a same interval
+    doc='A collection of (time-indexed) items of a same interval of time.'
+)
+Hunk = MyType(
+    'Hunk',
+    Slab,  # extra condition over Slab: Fixed size interval
+    doc='A slab of items for an interval coming from a fixed-size segmentation of time. '
+        '(A slab: A collection of (time-indexed) items of a same interval of time.)'
+)
+
+
+WaveformBytes = MyType('WaveformBytes', bytes)
+
 # --------------- SLANG TYPES -----------------------------------------------------------
 
 # ChkFeaturizer
