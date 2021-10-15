@@ -28,9 +28,11 @@ def MyType(
     >>> type(T)
     <class 'function'>
     >>> Key = MyType('Key', Any, aka=['key', 'k'])
-    >>> Key._aka
-    {'key', 'k'}
-    >>> Val = MyType('Val', int, float, List[Union[int, float]], doc="A number or list of numbers.")
+    >>> type(Key._aka)
+    <class 'set'>
+    >>> sorted(Key._aka)
+    ['k', 'key']
+    >>> Val = MyType('Val', Union[int, float, List[Union[int, float]]], doc="A number or list of numbers.")
     >>> Val.__doc__
     'A number or list of numbers.'
     """
@@ -67,27 +69,7 @@ def MyVar(
     assign_to_globals=False
 ):
     """
-    Make a new type with (optional) doc and (optional) aka, set of var names it often appears as
-
-    Args:
-        name: Name to give the variable
-        constraints: types (see typing.TypeVar)
-        doc: Optional string to put in __doc__ attribute
-        aka: Optional set (or any iterable) to put in _aka attribute,
-            meant to list names the variables of this type often appear as.
-
-    Returns: None
-
-    >>> from typing import Any, List
-    >>> T = MyType('T', int)
-    >>> type(T)
-    <class 'function'>
-    >>> Key = MyType('Key', Any, aka=['key', 'k'])
-    >>> Key._aka
-    {'key', 'k'}
-    >>> Val = MyType('Val', int, float, List[Union[int, float]], doc="A number or list of numbers.")
-    >>> Val.__doc__
-    'A number or list of numbers.'
+    TODO: Add docstring and doctests
     """
     if len(more_constraints) == 0:
         new_tp = TypeVar(
