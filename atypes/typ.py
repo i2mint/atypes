@@ -123,19 +123,18 @@ IntervalSlice = MyType(
 # Name options: piece, part, section, portion, fragment, wedge, slab, hunk
 
 TimeIndexedItem = MyType(
-    'TimeIndexedItem', Any,
-    doc='Data that is (implicitly or explicitly) time-indexed.'
+    'TimeIndexedItem', Any, doc='Data that is (implicitly or explicitly) time-indexed.'
 )
 Slab = MyType(
     'Slab',
     Iterable[TimeIndexedItem],  # extra condition: all items within a same interval
-    doc='A collection of (time-indexed) items of a same interval of time.'
+    doc='A collection of (time-indexed) items of a same interval of time.',
 )
 Hunk = MyType(
     'Hunk',
     Slab,  # extra condition over Slab: Fixed size interval
     doc='A slab of items for an interval coming from a fixed-size segmentation of time. '
-        '(A slab: A collection of (time-indexed) items of a same interval of time.)'
+    '(A slab: A collection of (time-indexed) items of a same interval of time.)',
 )
 
 

@@ -82,6 +82,7 @@ class WfChunker(Protocol):
 
     ```
     """
+
     def __call__(self, wf: Waveform, *args, **kwargs) -> Chunks:
         """Transforms a waveform into an iterable of fixed sized iterables called chunks"""
 
