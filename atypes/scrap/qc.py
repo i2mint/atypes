@@ -2,9 +2,8 @@
 Types used in qc
 """
 from typing import Sequence, Union, Any, Iterable, Callable
-import numpy as np
+from numbers import Number
 
-Number = Union[int, float, complex, np.number]
 PlcSample = Union[Number, str]
 Sample = Number
 Waveform = Sequence[Sample]
