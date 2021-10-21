@@ -14,6 +14,11 @@ from atypes.util import MyType
 # from functools import partial
 # NT = partial(new_type, assign_to_globals=True)
 
+FiltFunc = MyType(
+    "FiltFunc", Callable[[Any], bool],
+    doc="boolean function usually used to filter iterables",
+    aka={'filt', 'filt_func'}
+)
 # TODO: how do we express the fixed size-ness?
 FixedSizeSeq = MyType('FixedSizeSeq', Sequence)
 
@@ -22,7 +27,7 @@ VarSizeSeq = MyType('VarSizeSeq', List)
 Key = MyType('Key', Any, doc='Any object used to reference another', aka={'key', 'k'})
 
 # Waveform = Iterable[Union[float, int]]
-Sample = MyType('Sample', Number, doc='The numerical value of a digital signal sample',)
+Sample = MyType('Sample', Number, doc='The numerical value of a digital signal sample', )
 
 # TODO: How do we use the waveform? Several modes. Sometimes only iterable is needed.
 #  Sometimes iterable and sliceable. Sometimes length. But never reversable. So Sequence too strong.
@@ -36,7 +41,6 @@ KeyWfGen = MyType(
     Iterable[Tuple[Key, Waveform]],
     doc='A iterable of (Key, Waveform) pairs',
 )
-
 
 # Chunk = MyType('Chunk', FixedSizeSeq[Sample])
 Chunk = MyType('Chunk', Sequence[Sample], aka=['chk'])
@@ -52,7 +56,7 @@ Feature = MyType(
     'Feature',
     Number,
     doc='A number that represents a characteristic of something. '
-    'Usually appears as an item of an FV (a sequence of Features)',
+        'Usually appears as an item of an FV (a sequence of Features)',
 )
 # FV = FixedSizeSeq[Feature]
 
@@ -66,7 +70,7 @@ Featurizer = MyType(
     'Featurizer',
     Callable[[Any], FV],
     doc='A function that makes FVs (out of Chunks, other FVs, or anything really. '
-    '(This is a declaration that the output will be FVs, not what the input should be.)',
+        '(This is a declaration that the output will be FVs, not what the input should be.)',
 )
 ChkFeaturizer = MyType(
     'ChkFeaturizer',
@@ -75,37 +79,35 @@ ChkFeaturizer = MyType(
     doc='A function that makes FVs specifically from Chunks.',
 )
 
-
 Segment = MyType(
     'Segment',
     Sequence[Sample],
     aka='segment',
     doc='Data regarding an interval of time. This is often just a piece of waveform, '
-    'but could also be a bundle of several waveforms and other signals/datas that '
-    'happened in that interval of time.',
+        'but could also be a bundle of several waveforms and other signals/datas that '
+        'happened in that interval of time.',
 )
 Segments = MyType(
     'Segments', Iterable[Segment], aka='segments', doc='An iterable of segments',
 )
 
-
 TimeIndex = MyType(
     'TimeIndex',
     Number,
     doc='A number indexing time. Could be in an actual time unit, or could just be '
-    'an enumerator (i.e. "ordinal time")',
+        'an enumerator (i.e. "ordinal time")',
 )
 BT = MyType(
     'BT',
     TimeIndex,
     doc='TimeIndex for the lower bound of an interval of time. '
-    'Stands for "Bottom Time". By convention, a BT is inclusive.',
+        'Stands for "Bottom Time". By convention, a BT is inclusive.',
 )
 TT = MyType(
     'TT',
     TimeIndex,
     doc='TimeIndex for the upper bound of an interval of time. '
-    'Stands for "Upper Time". By convention, a TT is exclusive.',
+        'Stands for "Upper Time". By convention, a TT is exclusive.',
 )
 IntervalTuple = MyType(
     'IntervalTuple',
@@ -134,9 +136,8 @@ Hunk = MyType(
     'Hunk',
     Slab,  # extra condition over Slab: Fixed size interval
     doc='A slab of items for an interval coming from a fixed-size segmentation of time. '
-    '(A slab: A collection of (time-indexed) items of a same interval of time.)',
+        '(A slab: A collection of (time-indexed) items of a same interval of time.)',
 )
-
 
 WaveformBytes = MyType('WaveformBytes', bytes)
 
@@ -150,7 +151,7 @@ Snip = MyType(
     int,
     aka=['snip'],
     doc='The smallest element of a signal language. '
-    'Technically, an index representing a region of a feature space partition.',
+        'Technically, an index representing a region of a feature space partition.',
 )
 Snips = MyType(
     'Snips',
@@ -171,7 +172,7 @@ Snipper = MyType(
     Callable[[Waveform], Snips],
     aka=['snipper'],
     doc='The function that gets you from a stream of samples (Waveform) to '
-    'a stream of snips (Snips)',
+        'a stream of snips (Snips)',
 )
 
 # --------------- STORES ---------------------------------------------------------------------------
