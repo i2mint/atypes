@@ -5,7 +5,7 @@ from typing import Optional, Iterable, TypeVar, Union, NewType, Any
 
 def MyType(
     name: str,
-    tp,
+    tp: type = Any,
     doc: Optional[str] = None,
     aka: Optional[Union[str, Iterable[str]]] = None,
     *,
