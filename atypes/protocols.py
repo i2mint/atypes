@@ -1,7 +1,7 @@
 """Protocols for sound recognition"""
 
 import typing as ty
-from typing import Callable, Protocol, Iterable, Any
+from typing import Callable, Protocol, Iterable, Any, Union
 from atypes.typ import Waveform, Chunk, Chunks, Feature
 
 
@@ -9,12 +9,23 @@ class Gettable(Protocol):
     """Can fetch an element from obj with brackets: obj[k]
 
     >>> t: Gettable = 3  # will make linter complain
-    >>> t: Gettable = [1, 2, 3]  # linter won't complain because a list is Gettable
+    >>> tt: Gettable = [1, 2, 3]  # linter won't complain because a list is Gettable
     """
 
     def __getitem__(self, k: Any) -> Any:
         pass
 
+
+# TODO: Can we really distinguish non-Sliceable Gettables? Test?
+class Sliceable(Protocol):
+    """Can fetch an element from obj with brackets: obj[i:j]
+
+    >>> t: Sliceable = 3  # will make linter complain
+    >>> tt: Sliceable = [1, 2, 3]  # linter won't complain because a list is Gettable
+    """
+
+    def __getitem__(self, k: slice) -> Any:
+        pass
 
 # TODO: Not having the effect I want. Want linter to complain in these situations:
 
