@@ -27,6 +27,7 @@ class Sliceable(Protocol):
     def __getitem__(self, k: slice) -> Any:
         pass
 
+
 # TODO: Not having the effect I want. Want linter to complain in these situations:
 
 
