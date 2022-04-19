@@ -25,7 +25,6 @@ def compatible_unions(union1, union2):
     for arg1 in args1:
 
         compats = [has_compatible_type(arg1, arg2) for arg2 in args2]
-        print(compats)
         if not any(compats):
             return False
     return True
