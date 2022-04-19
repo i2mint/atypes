@@ -3,6 +3,7 @@
    :caption: Contents:
 
    module_docs/atypes
+   module_docs/atypes/compatible
    module_docs/atypes/protocols
    module_docs/atypes/scrap/protocol_experimentation
    module_docs/atypes/scrap/qc

@@ -62,7 +62,7 @@ def has_compatible_type(typing_inst1, typing_inst2):
     ):
         return False
 
-    # split into root and leaves 
+    # split into root and leaves
     origin1, args1 = typing.get_origin(typing_inst1), typing.get_args(typing_inst1)
     origin2, args2 = typing.get_origin(typing_inst2), typing.get_args(typing_inst2)
 
@@ -85,9 +85,8 @@ def has_compatible_type(typing_inst1, typing_inst2):
     return origin_comp and len_comp and args_comp
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     t1 = Union[int, float]
     t2 = Union[str, bool]
     t3 = Union[float, str]
     assert has_compatible_type(t1, t3)
-

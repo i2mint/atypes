@@ -48,4 +48,3 @@ def test_callable():
         Callable[[float, float], int], Callable[[int, float], int]
     )
     # assert not has_compatible_type(List[float], List[int])
-
