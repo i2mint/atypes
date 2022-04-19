@@ -1,6 +1,6 @@
 import pytest
 from typing import List, Dict, Callable, Iterable, Union, Tuple
-from plunk.sb.type_compatibility.compatible import has_compatible_type, builtins
+from atypes.compatible import has_compatible_type, builtins
 
 
 def test_builtins_leaves():
