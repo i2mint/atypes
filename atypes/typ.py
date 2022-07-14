@@ -1,6 +1,18 @@
 """Types and protocols"""
 
-from typing import Callable, Union, Any, List, Tuple, Iterable, Sequence, Mapping, T
+from typing import (
+    Callable,
+    Any,
+    List,
+    Tuple,
+    Iterable,
+    Sequence,
+    Mapping,
+    TypeVar,
+    T,
+    KT,
+    MutableMapping,
+)
 from numbers import Number
 
 # from numpy import ndarray, int16, int32, float32, float64
@@ -19,9 +31,54 @@ from atypes.util import MyType
 Factory = Callable[..., T]
 Factory.__doc__ = 'A function that makes objects of a specific kind'
 
+Store = Mapping[Any, T]
+Store.__doc__ = 'A mapping-interface to a store (usually persistent) of data'
 
+WritableStore = MutableMapping[Any, T]
+WritableStore.__doc__ = (
+    'A (mutuable-)mapping-interface to a store of data that allows writing to it'
+)
 # ------------------ ML -----------------------------------------------------------------
 
+
+Feature = MyType(
+    'Feature',
+    Number,  # if categorical needs to be cast to number (as sklearn obliges)
+    doc='A number that represents a characteristic of something. '
+    'Usually appears as an item of an FV (a sequence of Features)',
+)
+# FV = FixedSizeSeq[Feature]
+
+FV = MyType(
+    'FV',
+    Sequence[Feature],
+    doc='Feature Vector. The informational fingerprint of something.',
+)
+FVs = MyType('FVs', Iterable[FV], aka=['fvs'], doc='An iterable of FVs')
+
+Featurizer = MyType(
+    'Featurizer',
+    Callable[[Any], FV],
+    doc='A function that makes FVs (out of Chunks, other FVs, or anything really. '
+    '(This is a declaration that the output will be FVs, not what the input should be.)',
+)
+
+
+class _ml_proposals:
+    Data = Any
+
+    ModelFunc = Callable
+    Learner = Any
+    Fitter = Callable[[Learner, Data, ...], ModelFunc]
+
+    Xtype = TypeVar('Xtype')
+    Ytype = TypeVar('Ytype')
+    SupervisedFitter = Callable[[Xtype, Ytype, ...], Callable[[Xtype], Ytype]]
+
+    # SupervisedFitter = Callable[[FVs, Iterable[TargetType]], ModelFunc]
+    # Fitter = Callable[[Learner, Data, ...], ModelFunc]
+
+    # SupervisedData = Tuple[Fv]
 
 
 # ------------------ SIGNAL ML ----------------------------------------------------------
@@ -64,26 +121,6 @@ Chunker = MyType(
     doc='A callable that generates Chunks from a Waveform',
 )
 
-Feature = MyType(
-    'Feature',
-    Number,
-    doc='A number that represents a characteristic of something. '
-    'Usually appears as an item of an FV (a sequence of Features)',
-)
-# FV = FixedSizeSeq[Feature]
-
-FV = MyType(
-    'FV',
-    Sequence[Feature],
-    doc='Feature Vector. The informational fingerprint of something.',
-)
-FVs = MyType('FVs', Iterable[FV], aka=['fvs'], doc='An iterable of FVs')
-Featurizer = MyType(
-    'Featurizer',
-    Callable[[Any], FV],
-    doc='A function that makes FVs (out of Chunks, other FVs, or anything really. '
-    '(This is a declaration that the output will be FVs, not what the input should be.)',
-)
 ChkFeaturizer = MyType(
     'ChkFeaturizer',
     Callable[[Chunk], FV],
@@ -155,11 +192,13 @@ WaveformBytes = MyType('WaveformBytes', bytes)
 
 # --------------- STORES ----------------------------------------------------------------
 
+# WfStore = StoreType[Waveform]
+
 WfStore = MyType(
     'WfStore',
-    Mapping[Any, Waveform],
+    Store[Waveform],
     aka=['wf_store', 'wfs', 'audio_store'],
-    doc="A waveform store. More precisely, a key-value (Mapping) interface to waveforms"
+    doc='A waveform store. More precisely, a key-value (Mapping) interface to waveforms',
 )
 
 # --------------- SLANG TYPES -----------------------------------------------------------
