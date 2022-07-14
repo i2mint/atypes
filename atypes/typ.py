@@ -23,7 +23,6 @@ Factory.__doc__ = 'A function that makes objects of a specific kind'
 # ------------------ ML -----------------------------------------------------------------
 
 
-
 # ------------------ SIGNAL ML ----------------------------------------------------------
 FiltFunc = MyType(
     'FiltFunc',
@@ -159,7 +158,7 @@ WfStore = MyType(
     'WfStore',
     Mapping[Any, Waveform],
     aka=['wf_store', 'wfs', 'audio_store'],
-    doc="A waveform store. More precisely, a key-value (Mapping) interface to waveforms"
+    doc='A waveform store. More precisely, a key-value (Mapping) interface to waveforms',
 )
 
 # --------------- SLANG TYPES -----------------------------------------------------------
