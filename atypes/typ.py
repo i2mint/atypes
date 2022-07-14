@@ -1,6 +1,6 @@
 """Types and protocols"""
 
-from typing import Callable, Union, Any, List, Tuple, Iterable, Sequence
+from typing import Callable, Union, Any, List, Tuple, Iterable, Sequence, Mapping, T
 from numbers import Number
 
 # from numpy import ndarray, int16, int32, float32, float64
@@ -14,6 +14,17 @@ from atypes.util import MyType
 # from functools import partial
 # NT = partial(new_type, assign_to_globals=True)
 
+# ------------------ GENERAL ------------------------------------------------------------
+
+Factory = Callable[..., T]
+Factory.__doc__ = 'A function that makes objects of a specific kind'
+
+
+# ------------------ ML -----------------------------------------------------------------
+
+
+
+# ------------------ SIGNAL ML ----------------------------------------------------------
 FiltFunc = MyType(
     'FiltFunc',
     Callable[[Any], bool],
@@ -50,7 +61,7 @@ Chunker = MyType(
     'Chunker',
     Callable[[Waveform], Iterable[Chunk]],
     aka=['chunker', 'wf_to_chks'],
-    doc='The component that generates Chunks from a Waveform',
+    doc='A callable that generates Chunks from a Waveform',
 )
 
 Feature = MyType(
@@ -141,6 +152,15 @@ Hunk = MyType(
 )
 
 WaveformBytes = MyType('WaveformBytes', bytes)
+
+# --------------- STORES ----------------------------------------------------------------
+
+WfStore = MyType(
+    'WfStore',
+    Mapping[Any, Waveform],
+    aka=['wf_store', 'wfs', 'audio_store'],
+    doc="A waveform store. More precisely, a key-value (Mapping) interface to waveforms"
+)
 
 # --------------- SLANG TYPES -----------------------------------------------------------
 
