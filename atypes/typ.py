@@ -63,22 +63,42 @@ Featurizer = MyType(
     '(This is a declaration that the output will be FVs, not what the input should be.)',
 )
 
+# from typing import Protocol
+#
+#
+# Data = Any
+#
+# ModelFunc = Callable
+# Learner = Any
+# Fitter = Callable[[Learner, Data, ...], ModelFunc]
+#
+# Xtype = TypeVar('Xtype')
+# Ytype = TypeVar('Ytype')
+#
+# # SupervisedFitter = Callable[[Xtype, Ytype, ...], Callable[[Xtype], Ytype]]
+# # didn't work, so:
+# class SupervisedFitter(Protocol):
+#     """Describes a supervised fitting function that takes some (X, y) pair of
+#     iterables and returns a callable that takes an X and returns a y.
+#     The X is meant to describe an array of feature vectors and y a corresponding
+#     array of values associated with each vector.
+#     A supervised fitter takes a (X, y) pair and returns a function whose role it is
+#     to take X inputs and return estimations/predictions of what y would be.
+#     """
+#
+#     def __call__(
+#         # note, using double underscores here to indicate that the name of the
+#         # argument shouldn't matter
+#         # See: https://mypy.readthedocs.io/en/stable/protocols.html#callback-protocols
+#         self, __X: Xtype, __y: Ytype, *args, **kwargs
+#     ) -> Callable[[Xtype], Ytype]:
+#         pass
 
-class _ml_proposals:
-    Data = Any
 
-    ModelFunc = Callable
-    Learner = Any
-    Fitter = Callable[[Learner, Data, ...], ModelFunc]
+# SupervisedFitter = Callable[[FVs, Iterable[TargetType]], ModelFunc]
+# Fitter = Callable[[Learner, Data, ...], ModelFunc]
 
-    Xtype = TypeVar('Xtype')
-    Ytype = TypeVar('Ytype')
-    SupervisedFitter = Callable[[Xtype, Ytype, ...], Callable[[Xtype], Ytype]]
-
-    # SupervisedFitter = Callable[[FVs, Iterable[TargetType]], ModelFunc]
-    # Fitter = Callable[[Learner, Data, ...], ModelFunc]
-
-    # SupervisedData = Tuple[Fv]
+# SupervisedData = Tuple[Fv]
 
 
 # ------------------ SIGNAL ML ----------------------------------------------------------
