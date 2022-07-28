@@ -1,0 +1,61 @@
+@startuml
+
+
+'''''' Below is just to remember a few things
+'https://plantuml.com/class-diagram
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|--- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+
+
+
+interface Iterable{
+__iter__()
+}
+
+interface Sliceable {
+__getitem__(slice_)
+}
+
+class slice {
+    bt
+    tt
+}
+
+interface Waveform {
+src
+__iter__()
+__getitem__(slice_)
+}
+
+Waveform --- Iterable
+Waveform *- Sliceable
+Sliceable .. slice
+
+note right of Waveform::src
+    Any source
+    of waveform
+end note
+
+@enduml

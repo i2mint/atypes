@@ -1,0 +1,129 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+'caption Vocabulary
+title Mindmap of terminology
+
+'skinparam monochrome true
+'skinparam white transparent
+
+<style>
+mindmapDiagram {
+  node {
+    BackgroundColor #eeeeff
+    LineColor #111111
+  }
+  boxless {
+    FontColor black
+  }
+  arrow {
+    LineStyle 0
+    LineThickness 2
+    LineColor #222222
+}
+}
+</style>
+
+
+*[#999999] Component
+**[#cccccc] Selector
+
+*** Segmenter
+
+**** fixed-size \n (chunker)
+***** fixed-step
+******_ step=size
+******_ step<size
+******_ step>size
+***** "smart" chunker
+****** controlled \n by audio stream only
+*******_ over feature threshold (example, outlier score)
+*******_ audio event (example, click)
+****** controlled \n by other streams
+*******_ scheduled
+*******_ event
+
+**** variable size
+*****_ interval annotations
+*****_ thresholded features
+*****_ sessions
+*****_ phases
+
+*** Filter
+**** Horizontal
+*****_ too close to previous segment
+*****_ insufficient volume
+*****_ saturated audio
+**** Vertical
+*****_ Field selection/extraction
+*****_ channel/kind/source selection
+
+left side
+
+**[#cccccc] Source
+***_ Sensor
+***_ File system
+***_ Database
+**[#cccccc] Stream
+***_ Live
+***_ Persisted
+**[#cccccc] Reader
+*** KvReader
+*** StreamReader
+****_ BufferReader
+****_ FileReader
+**[#cccccc] Buffer
+***_ BufferStats
+***_ InfiniteWf
+***_ Otomata
+**[#cccccc] Merger
+*** Horizontal
+****_ (re-)chunker
+*** Vertical
+****_ multi-channel weaver
+**[#cccccc] Featurizer
+*** from filter
+****_ field extractor
+****_ (explicit) timestamper
+*** computed
+****_ (computed) timestamper
+****_ fft
+****_ spectral projector
+****_ outlier score
+****_ detection category
+**[#cccccc] Learner
+*** unsupervised \n (only signal features)
+****_ outlier model
+****_ unsupervised spectral projectors
+*** supervised \n (learns also with signal \ntarget annotations\n which will not be \npresent when running)
+****_ classifier (target is categorical)
+****_ regressor (target is numerical)
+****_ supervised spectral projectors
+
+'header
+'My super header
+'endheader
+
+center footer
+Note, the hierarchical relations displayed are the main ones, but don't exclude other relations
+end footer
+
+'legend right
+'  Short
+'  legend
+'endlegend
+
+
+
+@endmindmap
+
+'''''' You can have another mindmap in the same file
+'@startmindmap
+'title More
+'
+'*[#999999] Component
+'**[#cccccc] Selector
+'
+'*** Segmenter
+'
+'@endmindmap
