@@ -1,18 +1,34 @@
 """Protocols for sound recognition"""
 
 import typing as ty
-from typing import Callable, Protocol, Iterable, Any, Union
+from typing import Protocol, Any, KT, VT, runtime_checkable
 from atypes.typ import Waveform, Chunk, Chunks, Feature
 
 
+@runtime_checkable
 class Gettable(Protocol):
-    """Can fetch an element from obj with brackets: obj[k]
+    """The missing type for objects that can be fetched from.
+    The contract is that we can fetch an element from ``obj`` with brackets: ``obj[k]``.
+    That is, ``obj`` has a ``__getitem__`` method.
 
-    >>> t: Gettable = 3  # will make linter complain
-    >>> tt: Gettable = [1, 2, 3]  # linter won't complain because a list is Gettable
+    >>> isinstance(3, Gettable)  # 3 is not Gettable (can't do 3[...])
+    False
+
+    But ``dict``, ``list``, and ``str`` are Gettable:
+
+    >>> isinstance([1, 2, 3], Gettable)
+    True
+    >>> isinstance({'foo': 'bar'}, Gettable)
+    True
+    >>> isinstance('foo', Gettable)
+
+    Note that so are their types:
+    >>> all(isinstance(c, Gettable) for c in (list, dict, str)
+    True
+
     """
 
-    def __getitem__(self, k: Any) -> Any:
+    def __getitem__(self, k: KT) -> VT:
         pass
 
 
