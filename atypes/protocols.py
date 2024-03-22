@@ -21,9 +21,10 @@ class Gettable(Protocol):
     >>> isinstance({'foo': 'bar'}, Gettable)
     True
     >>> isinstance('foo', Gettable)
+    True
 
     Note that so are their types:
-    >>> all(isinstance(c, Gettable) for c in (list, dict, str)
+    >>> all(isinstance(c, Gettable) for c in (list, dict, str))
     True
 
     """
