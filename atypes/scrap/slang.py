@@ -1,7 +1,8 @@
 """
 Types for sound recognition.
 """
-from typing import Callable, Union, Any, List, Tuple, Iterable, Sequence
+from typing import Union, Any, List, Tuple
+from collections.abc import Callable, Iterable, Sequence
 from numbers import Number
 
 # from numpy import ndarray, int16, int32, float32, float64
@@ -17,9 +18,9 @@ from atypes.util import MyType
 # NT = partial(new_type, assign_to_globals=True)
 
 
-FixedSizeSeq = MyType('FixedSizeSeq', Tuple, List)
+FixedSizeSeq = MyType('FixedSizeSeq', tuple, list)
 
-VarSizeSeq = MyType('VarSizeSeq', List)
+VarSizeSeq = MyType('VarSizeSeq', list)
 
 Key = MyType('Key', Any, doc='Any object used to reference another', aka={'key', 'k'})
 
@@ -35,7 +36,7 @@ Waveforms = Iterable[Waveform]
 # WfGen = MyType('WfGen', Iterable[Waveform], doc='A iterable of Waveforms')
 KeyWfGen = MyType(
     'KeyWfGen',
-    Iterable[Tuple[Key, Waveform]],
+    Iterable[tuple[Key, Waveform]],
     doc='A iterable of (Key, Waveform) pairs',
 )
 

@@ -2,7 +2,8 @@
 Experiences in protocols
 """
 # https://www.python.org/dev/peps/pep-0560/
-from typing import Protocol, Callable, runtime_checkable, Any, Protocol
+from typing import Protocol, runtime_checkable, Any, Protocol
+from collections.abc import Callable
 from functools import wraps
 from types import LambdaType
 from i2 import Sig

@@ -1,13 +1,14 @@
 """Utilities to use in atypes functionality"""
 
-from typing import Optional, Iterable, TypeVar, Union, NewType, Any
+from typing import Optional, TypeVar, Union, NewType, Any
+from collections.abc import Iterable
 
 
 def MyType(
     name: str,
     tp: type = Any,
-    doc: Optional[str] = None,
-    aka: Optional[Union[str, Iterable[str]]] = None,
+    doc: str | None = None,
+    aka: str | Iterable[str] | None = None,
     *,
     assign_to_globals=False
 ):
@@ -72,8 +73,8 @@ def MyVar(
     name: str,
     constraint: type = Any,
     *more_constraints,
-    doc: Optional[str] = None,
-    aka: Optional[Union[str, Iterable[str]]] = None,
+    doc: str | None = None,
+    aka: str | Iterable[str] | None = None,
     covariant=False,
     contravariant=False,
     assign_to_globals=False

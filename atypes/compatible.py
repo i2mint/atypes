@@ -1,7 +1,8 @@
 """Module to compare type annotations"""
 
 import typing
-from typing import List, Dict, Iterable, Callable, Union, Tuple
+from typing import List, Dict, Union, Tuple
+from collections.abc import Iterable, Callable
 from typing import _remove_dups_flatten
 
 builtins = [int, float, str, bool]
@@ -71,7 +72,7 @@ def has_compatible_type(typing_inst1, typing_inst2):
     if origin1 == Callable and origin2 == Callable:
         return True
 
-    if origin1 == Tuple and origin2 == Tuple:
+    if origin1 == tuple and origin2 == tuple:
         return compatible_tuples(args1, args2)
     # roots must be compatible
     origin_comp = has_compatible_type(origin1, origin2)

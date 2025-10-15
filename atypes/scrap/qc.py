@@ -1,7 +1,8 @@
 """
 Types used in qc
 """
-from typing import Sequence, Union, Any, Iterable, Callable
+from typing import Union, Any
+from collections.abc import Sequence, Iterable, Callable
 from numbers import Number
 
 PlcSample = Union[Number, str]

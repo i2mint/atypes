@@ -1,18 +1,14 @@
 """Types and protocols"""
 
 from typing import (
-    Callable,
     Any,
     List,
     Tuple,
-    Iterable,
-    Sequence,
-    Mapping,
     TypeVar,
     T,
     KT,
-    MutableMapping,
 )
+from collections.abc import Callable, Iterable, Sequence, Mapping, MutableMapping
 from numbers import Number
 
 # from numpy import ndarray, int16, int32, float32, float64
@@ -111,7 +107,7 @@ FiltFunc = MyType(
 # TODO: how do we express the fixed size-ness?
 FixedSizeSeq = MyType('FixedSizeSeq', Sequence)
 
-VarSizeSeq = MyType('VarSizeSeq', List)
+VarSizeSeq = MyType('VarSizeSeq', list)
 
 Key = MyType('Key', Any, doc='Any object used to reference another', aka={'key', 'k'})
 
@@ -127,7 +123,7 @@ Waveforms = Iterable[Waveform]
 # WfGen = MyType('WfGen', Iterable[Waveform], doc='A iterable of Waveforms')
 KeyWfGen = MyType(
     'KeyWfGen',
-    Iterable[Tuple[Key, Waveform]],
+    Iterable[tuple[Key, Waveform]],
     doc='A iterable of (Key, Waveform) pairs',
 )
 
@@ -180,7 +176,7 @@ TT = MyType(
 )
 IntervalTuple = MyType(
     'IntervalTuple',
-    Tuple[BT, TT],
+    tuple[BT, TT],
     doc='Denotes an interval of time by specifying the (BT, TT) pair',
 )
 IntervalSlice = MyType(
