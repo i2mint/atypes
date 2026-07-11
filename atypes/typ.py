@@ -8,7 +8,11 @@ from typing import (
     T,
     KT,
 )
-from collections.abc import Callable, Iterable, Sequence, Mapping, MutableMapping
+
+# These must come from `typing`, not `collections.abc`: the aliases built from them
+# below get a `__doc__` assigned, and a `collections.abc` GenericAlias has a
+# read-only `__doc__` (AttributeError on 3.12+).
+from typing import Callable, Iterable, Sequence, Mapping, MutableMapping
 from numbers import Number
 
 # from numpy import ndarray, int16, int32, float32, float64
