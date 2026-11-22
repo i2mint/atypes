@@ -1,0 +1,16 @@
+# atypes
+
+> Abstractions for signal machine learning.
+
+
+## Pages in this subsection
+
+- [atypes](atypes.html.md): Type tools for sound recognition
+- [atypes.compatible](atypes.compatible.html.md): Module to compare type annotations
+- [atypes.protocols](atypes.protocols.html.md): Protocols for sound recognition
+- [atypes.typ](atypes.typ.html.md): Types and protocols
+- [atypes.util](atypes.util.html.md): Utilities to use in atypes functionality
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.

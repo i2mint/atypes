@@ -1,0 +1,13 @@
+atypes.util
+===========
+
+.. automodule:: atypes.util
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      MyType
+      MyVar
+   

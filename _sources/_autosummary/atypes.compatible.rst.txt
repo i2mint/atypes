@@ -1,0 +1,16 @@
+atypes.compatible
+=================
+
+.. automodule:: atypes.compatible
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      compatible_callables
+      compatible_tuples
+      compatible_unions
+      has_compatible_type
+      safe_issubclass
+   

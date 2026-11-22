@@ -1,4 +1,0 @@
-atypes
-======
-.. automodule:: atypes
-   :members:

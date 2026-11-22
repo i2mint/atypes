@@ -1,0 +1,16 @@
+﻿atypes
+======
+
+.. automodule:: atypes
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   compatible
+   protocols
+   typ
+   util
