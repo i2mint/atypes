@@ -80,6 +80,7 @@ convention = "google"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
+norecursedirs = ["scrap"]
 testpaths = [
     "atypes",
 ]
