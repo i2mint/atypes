@@ -53,8 +53,8 @@ def MyType(
     What is returned is really the identity function, so
     `x is NewType('Name', int)(x)` is always `True`.
 
-    >>> type(Val)
-    <class 'function'>
+    >>> callable(Val)  # a function (py<3.10) or a typing.NewType (py>=3.10)
+    True
 
     """
 
